@@ -85,7 +85,12 @@ BOOL slideableHotbar;
     }
     [displayLink addToRunLoop:NSRunLoop.currentRunLoop forMode:NSRunLoopCommonModes];
 
+
     CGFloat screenScale = UIScreen.mainScreen.scale;
+    UIEdgeInsets insets = UIApplication.sharedApplication.windows.firstObject.safeAreaInsets;
+
+    // width: offset the notch parts
+    CGFloat screenWidth = (screenBounds.size.width - insets.left - insets.right) * screenScale;
 
     [self updateSavedResolution];
 
@@ -96,7 +101,7 @@ BOOL slideableHotbar;
 
     [self performSelector:@selector(initCategory_Navigation)];
     
-    self.surfaceView = [[GameSurfaceView alloc] initWithFrame:self.view.frame];
+    self.surfaceView = [[GameSurfaceView alloc] initWithFrame:(insets.left, self.view.frame.origin.y, screenWidth, self.view.frame.size.height)];
     self.surfaceView.layer.contentsScale = screenScale * resolutionScale;
     self.surfaceView.layer.magnificationFilter = self.surfaceView.layer.minificationFilter = kCAFilterNearest;
 

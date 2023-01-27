@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     name: Development build
-    runs-on: MacStadium
+    runs-on: ok
     steps:
       - name: Remove work folders
         env:
