@@ -87,7 +87,7 @@ BOOL slideableHotbar;
 
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGFloat screenScale = UIScreen.mainScreen.scale;
-    UIEdgeInsets insets = UIApplication.shared.windows[0].safeAreaInsets;
+    UIEdgeInsets insets = UIApplication.sharedApplication.windows.firstObject.safeAreaInsets;
     CGFloat screenWidth = (screenBounds.size.width - insets.left - insets.right) * screenScale;
 
     [self updateSavedResolution];
@@ -272,7 +272,7 @@ BOOL slideableHotbar;
 
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGFloat screenScale = UIScreen.mainScreen.scale;
-    UIEdgeInsets insets = UIApplication.shared.windows[0].safeAreaInsets;
+    UIEdgeInsets insets = UIApplication.sharedApplication.windows.firstObject.safeAreaInsets;
     CGFloat screenWidth = (screenBounds.size.width - insets.left - insets.right) * screenScale;
 
     self.surfaceView.frame = CGRectMake(insets.left, self.view.frame.origin.y, screenWidth, self.view.frame.size.height);
