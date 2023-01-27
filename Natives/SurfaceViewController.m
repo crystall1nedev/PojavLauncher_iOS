@@ -87,9 +87,7 @@ BOOL slideableHotbar;
 
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGFloat screenScale = UIScreen.mainScreen.scale;
-    UIEdgeInsets insets = UIApplication.sharedApplication.windows.firstObject.safeAreaInsets;
-
-    // width: offset the notch parts
+    UIEdgeInsets insets = UIApplication.shared.windows[0].safeAreaInsets;
     CGFloat screenWidth = (screenBounds.size.width - insets.left - insets.right) * screenScale;
 
     [self updateSavedResolution];
@@ -271,6 +269,13 @@ BOOL slideableHotbar;
     if (@available(iOS 14.0, *)) {
         [self setNeedsUpdateOfPrefersPointerLocked];
     }
+
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGFloat screenScale = UIScreen.mainScreen.scale;
+    UIEdgeInsets insets = UIApplication.shared.windows[0].safeAreaInsets;
+    CGFloat screenWidth = (screenBounds.size.width - insets.left - insets.right) * screenScale;
+
+    self.surfaceView.frame = CGRectMake(insets.left, self.view.frame.origin.y, screenWidth, self.view.frame.size.height);
 }
 
 - (void)updateJetsamControl {
@@ -424,6 +429,10 @@ BOOL slideableHotbar;
         virtualMouseFrame = self.mousePointerView.frame;
     }];
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
+- (void)safeAreaInsetsDidChange {
+
 }
 
 #pragma mark - Input: send touch utilities
